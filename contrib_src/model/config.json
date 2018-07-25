@@ -52,12 +52,5 @@
       ]
     }
   },
-  "script": [
-    {
-      "type": "bash",
-      "variables": {
-        "file_name": "start_cardiacfcn.sh"
-      }
-    }
-  ]
+  "allow_user_input": true
 }
