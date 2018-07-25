@@ -40,8 +40,9 @@ class ImageProcessor(ImageProcessorBase):
         image = PIL.Image.fromarray(inferenceResults, 'RGBA')
         # reasmple back to original input size
         image = image.resize((self.inputSize[0],self.inputSize[1]), resample = PIL.Image.LANCZOS)
-        print ('postprocessing done.')
-        return image
+        # output as numpy array
+        npArr = np.array(image)
+        return npArr
 
 
     def _toRgba(self, arr):
