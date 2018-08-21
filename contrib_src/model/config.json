@@ -1,7 +1,7 @@
 {
   "id": "985c8604-1381-4ebf-85af-bfe32080fb55",
   "meta": {
-    "name": "CardiacFCN",
+    "name": "cardiac-fcn",
     "application_area": "Cardiac Imaging",
     "task": "Segmentation",
     "task_extended": "Segmenting the right ventricle in MRI",
