@@ -1,4 +1,4 @@
 {
-  "docker_id": "modelhub/main_keras_2.0.2:0.3.0",
+  "docker_id": "modelhub/keras-modelhub:1.0.0",
   "external_contrib_files": []
 }
