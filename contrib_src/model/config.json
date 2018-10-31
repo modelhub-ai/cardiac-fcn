@@ -29,9 +29,10 @@
       "The proposed FCN architecture is efficiently trained end-to-end on a graphics processing unit (GPU) in a single learning stage from whole image inputs and ground truths to make inference at every pixel, a task commonly known as pixel-wise labeling or per-pixel classification.",
     "architecture": "Fully Convolutional Neural Network (FCN)",
     "learning_type": "Supervised learning",
+    "backend": ["tensorflow", "keras"],
     "io": {
       "input": {
-        "format": ["image/png"],
+        "format": ["application/dicom"],
         "dim_limits": [
           {
             "min": 1
@@ -48,11 +49,12 @@
       },
       "output": [
         {
-          "name": "probabilities",
+          "name": "right ventricle mask",
           "type": "mask_image"
         }
       ]
     }
   },
-  "allow_user_input": true
+  "allow_user_test": false,
+  "allow_sample_demo": false
 }
