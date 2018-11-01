@@ -6,16 +6,21 @@ import json
 
 
 class ImageProcessor(ImageProcessorBase):
-        
+
     def _preprocessBeforeConversionToNumpy(self, image):
         if isinstance(image, PIL.Image.Image):
             self.inputSize = image.size
             image = image.resize((200,200), resample = PIL.Image.LANCZOS)
         elif isinstance(image, SimpleITK.Image):
-            newSize = [200, 200]
+            self.inputSize = image.GetSize()
+            newSize = [200, 200, 1]
             referenceImage = SimpleITK.Image(newSize, image.GetPixelIDValue())
             referenceImage.SetOrigin(image.GetOrigin())
+            print " direction ", image.GetDirection()
+            print " size: ", image.GetSize()
+            print " spacing: ", image.GetSpacing()
             referenceImage.SetDirection(image.GetDirection())
+
             referenceImage.SetSpacing([sz*spc/nsz for nsz,sz,spc in zip(newSize,
                                                                         image.GetSize(),
                                                                         image.GetSpacing())])
@@ -33,6 +38,8 @@ class ImageProcessor(ImageProcessorBase):
 
 
     def computeOutput(self, inferenceResults):
+        # inference result is (1,200,200,1)
+        # dirty way to resample, convert to PIL, then back to numpy array.
         # get rid of 1's in the input
         inferenceResults=inferenceResults.reshape(200,200)
         # convert to 4 channels
@@ -50,5 +57,3 @@ class ImageProcessor(ImageProcessorBase):
         arr = (arr*255).astype('uint8')
         alpha = np.full((arr.shape), 255)
         return np.asarray(np.dstack((arr, arr, arr, alpha)), dtype=np.uint8)
-
-
